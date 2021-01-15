@@ -31,5 +31,6 @@ namespace Comic_Book.Models
                 return SeriesTitle.Replace(" ", "-").ToLower() + "-" + IssueNumber + ".jpg";
             }
         }
+
     }
 }
