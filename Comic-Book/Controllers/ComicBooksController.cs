@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Comic_Book.Models;
 
 namespace Comic_Book.Controllers
 {
@@ -16,25 +17,50 @@ namespace Comic_Book.Controllers
 
         public ActionResult Detail()
         {
-            ViewBag.SeriesTitle = "The Amazing Spider-Man";
-            ViewBag.issueNumber = 700;
-            ViewBag.Description = @"<p>Final issue! Witness the final
+            ComicBook comicBook = new ComicBook()
+            {
+                SeriesTitle = "The Amazing Spider-Man",
+                IssueNumber = 700,
+                DescriptionHtml = @"<p>Final issue! Witness the final
                 hours of Doctor Octopus' life and his one,
                 last, great act of revenge! Even if Spider-Man
-                survives... <strong>will Peter Parker?</strong></p>";
-            ViewBag.Artists = new string[]
+                survives... <strong>will Peter Parker?</strong></p>",
+                Artists = new Artist[]
           {
-                "Script: Dan Slott",
-                "Pencils: Humberto Ramos",
-                "Inks: Victor Olazaba",
-                "Colors: Edgar Delgado",
-                "Letters: Chris Eliopoulos"
-                          };
+              new Artist()
+              {
+                Role= "Script",
+                Name = "Dan Slott",
+              },
+              new Artist()
+              {
+                Role=  "Pencils",
+                Name = " Humberto Ramos"
+              },
+              new Artist()
+              {
+                Role= "Inks",
+                Name = "Victor Olazaba",
+              },
+              new Artist()
+              {
+                Role= "Colors",
+                Name = "Edgar Delgado",
+              },
+              new Artist()
+              {
+                Role= "Letters",
+                Name = "Chris Eliopoulos",
+              },
+
+          }
+            };
+
             if (DateTime.Today.DayOfWeek == DayOfWeek.Sunday)
             {
                 return Redirect("/ComicBooks/Index");
             }
-            return View();
+            return View(comicBook);
         }
     }
 }
